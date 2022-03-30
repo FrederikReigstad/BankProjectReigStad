@@ -30,8 +30,10 @@ public class BankAccount {
         if (initialBalance < 0) {
             throw new IllegalArgumentException("InitialBalance must be positive");
         }
+
+
         //create the object
-        else {
+            else {
             this.accNumber = accNumber;
             this.balance = initialBalance;
             this.interestRate = -1;
@@ -82,7 +84,19 @@ public class BankAccount {
      * @param amount
      * @throws IllegalArgumentException if amount < 0 OR amount > account balance
      */
-    public void withdraw(double amount) throws IllegalArgumentException {}
+    public void withdraw(double amount) throws IllegalArgumentException {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Amount must be a positive number");
+        }
+        else if (amount > this.balance) {
+            throw new IllegalArgumentException("Amount to withdraw exceeds available money");
+        }
+        else {
+            this.balance = this.balance - amount;
+        }
+
+
+    }
 
 
 

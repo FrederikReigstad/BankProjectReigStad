@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,16 +27,18 @@ class BankAccountTest {
         Assertions.assertEquals(expectedBalance, actualBalance);
     }
 
+    @DisplayName("Test invalid inputs (< 0) of deposit method")
+    @Test
     public void testInvalidDeposit() {
 
         // Arrange
         double initialBalance = 500.00;
-        double interestRate = -0.21;
+        double amount = -100.00;
         BankAccount account = new BankAccount(1111, initialBalance);
 
         // Act + assert
         Exception err = Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            account.deposit(interestRate);
+            account.deposit(amount);
         });
 
         // Extra assert
@@ -64,6 +68,20 @@ class BankAccountTest {
 
     @org.junit.jupiter.api.Test
     void withdraw() {
+        // Arrange
+        double initialBalance = 1000.00;
+        double amount = 500.00;
+        BankAccount account = new BankAccount(1111, initialBalance);
+
+        // Act
+        account.withdraw(amount);
+
+        // Assert
+        double expectedBalance = 500.00;
+        double actualBalance = account.getBalance();
+
+        Assertions.assertEquals(expectedBalance, actualBalance);
+
     }
 
     @org.junit.jupiter.api.Test
@@ -72,5 +90,10 @@ class BankAccountTest {
 
     @org.junit.jupiter.api.Test
     void addInterest() {
+    }
+
+    @Test
+    void testWithdraw() {
+
     }
 }
